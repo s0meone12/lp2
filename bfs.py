@@ -33,7 +33,43 @@ def bfs(node):
                 visited.append(neigh)
                 queue.append(neigh)
 
-
 # Driver Code
 if __name__ == "__main__":
     bfs('A')
+
+
+
+# bfs for numbers
+
+class Graph:
+    def __init__(self):
+        self.graph = {}
+
+    def add_edge(self, u, v):
+        self.graph.setdefault(u, []).append(v)
+        self.graph.setdefault(v, []).append(u)
+
+    def bfs_recursive(self, start, visited=None):
+        if visited is None:
+            visited = set()
+        visited.add(start)
+        print(start, end=" ")
+        for neighbor in self.graph[start]:
+            if neighbor not in visited:
+                self.bfs_recursive(neighbor, visited)
+
+
+# Example usage
+if __name__ == "__main__":
+    # Create a graph
+    graph = Graph()
+    graph.add_edge(1, 2)
+    graph.add_edge(1, 3)
+    graph.add_edge(2, 4)
+    graph.add_edge(2, 5)
+    graph.add_edge(3, 6)
+    graph.add_edge(3, 7)
+
+    print("BFS Recursive:")
+    graph.bfs_recursive(1)
+
